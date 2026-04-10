@@ -21,7 +21,6 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-// ✅ Optional auth — token असेल तर user attach करा, नसेल तरी चालेल
 const optionalAuth = async (req, res, next) => {
   try {
     if (req.headers.authorization?.startsWith("Bearer")) {
@@ -30,7 +29,7 @@ const optionalAuth = async (req, res, next) => {
       req.user = await User.findById(decoded.id).select("-password");
     }
   } catch (e) {
-    // invalid token असला तरी continue
+   
   }
   next();
 };

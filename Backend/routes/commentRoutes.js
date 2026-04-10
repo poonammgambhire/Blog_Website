@@ -4,7 +4,6 @@ import { protect, adminOnly } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// ✅ Get MY comments (Logged-in user साठी) — /api/comments/my
 router.get("/my", protect, async (req, res) => {
   try {
     const blogs = await Blog.find({ "comments.user": req.user._id })
@@ -14,7 +13,7 @@ router.get("/my", protect, async (req, res) => {
     const myComments = [];
     blogs.forEach(blog => {
       blog.comments.forEach(comment => {
-        // फक्त logged-in user चे comments
+     
         if (comment.user?._id?.toString() === req.user._id.toString()) {
           myComments.push({
             _id: comment._id,
@@ -35,7 +34,6 @@ router.get("/my", protect, async (req, res) => {
   }
 });
 
-// ✅ Delete MY comment (User स्वतःचा comment delete करू शकतो) — /api/comments/:id
 router.delete("/:id", protect, async (req, res) => {
   try {
     const blog = await Blog.findOne({ "comments._id": req.params.id });
@@ -44,7 +42,6 @@ router.delete("/:id", protect, async (req, res) => {
     const comment = blog.comments.id(req.params.id);
     if (!comment) return res.status(404).json({ message: "Comment not found" });
 
-    // User स्वतःचा comment delete करू शकतो, admin सगळे delete करू शकतो
     if (
       comment.user.toString() !== req.user._id.toString() &&
       req.user.role !== "admin"
@@ -63,7 +60,7 @@ router.delete("/:id", protect, async (req, res) => {
   }
 });
 
-// ✅ Get ALL comments (Admin साठी) — /api/comments
+// ✅ Get ALL comments (Admin ) — /api/comments
 router.get("/", protect, adminOnly, async (req, res) => {
   try {
     const blogs = await Blog.find({ "comments.0": { $exists: true } })

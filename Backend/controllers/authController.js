@@ -244,7 +244,7 @@ export const resendOtp = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // नवीन OTP generate करा
+   
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
     user.otpCode = otp;
@@ -264,7 +264,7 @@ export const resendOtp = async (req, res) => {
   }
 };
 
-// ✅ Reset Password — token valid असेल तर password बदलतो
+
 export const resetPassword = async (req, res) => {
   try {
     if (!req.body.password || req.body.password.length < 6)

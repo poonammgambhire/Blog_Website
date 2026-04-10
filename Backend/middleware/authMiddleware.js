@@ -20,7 +20,6 @@ export const protect = async (req, res, next) => {
         return res.status(401).json({ message: "Not authorized, user not found" });
       }
 
-      // ✅ Blocked user कोणताच protected route access करू शकत नाही
       if (user.isBlocked) {
         return res.status(403).json({ message: "Your account has been blocked" });
       }
@@ -31,7 +30,6 @@ export const protect = async (req, res, next) => {
       return res.status(401).json({ message: "Not authorized, no token" });
     }
   } catch (error) {
-    // ✅ debug log नाही — sensitive info leak होणार नाही
     return res.status(401).json({ message: "Not authorized, token failed" });
   }
 };

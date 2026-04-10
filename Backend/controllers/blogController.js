@@ -189,7 +189,6 @@ export const addComment = async (req, res) => {
     blog.comments.push({ user: req.user._id, text });
     await blog.save();
 
-    // Populate करून return करा जेणेकरून Frontend ला user info मिळेल
     await blog.populate("comments.user", "name avatar");
     res.status(201).json({ message: "Comment added", comments: blog.comments });
   } catch (error) {

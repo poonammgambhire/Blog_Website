@@ -81,7 +81,7 @@ enum: ["Technology", "Startup", "Lifestyle", "Finance", "Travel", "Food", "Healt
   { timestamps: true }
 );
 
-// ✅ Slug auto generate
+
 // ✅ Slug auto generate
 blogSchema.pre("save", async function () {
   if (this.isModified("title")) {

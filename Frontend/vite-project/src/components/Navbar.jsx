@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import useAuth from '../hooks/useAuth'
 
-// ✅ Helper function — placeholder असेल तर ui-avatars वापर
+
 const getAvatar = (avatar, name) => {
   const fallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(name || 'User')}&background=7c3aed&color=fff&size=80`
   if (!avatar || 
@@ -106,7 +106,7 @@ const Navbar = () => {
           {user ? (
             <>
               <div className='flex items-center gap-3 pb-3 border-b border-gray-100'>
-                {/* ✅ getAvatar वापरला */}
+                {/* ✅ getAvatar */}
                 <img
                   src={getAvatar(user.avatar, user.name)}
                   alt={user.name}

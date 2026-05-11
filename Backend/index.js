@@ -14,15 +14,15 @@ import commentRoutes from "./routes/commentRoutes.js";
 
 const app = express();
 
-// ✅ CORS — production मध्ये specific origin
+// ✅ CORS
 const allowedOrigins = [
   process.env.CLIENT_URL || "http://localhost:5173",
-  "http://localhost:5174", // vite alternate port
+  "http://localhost:5174",
+  "https://blog-frontend-nine-gray.vercel.app",
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Postman / server-to-server requests साठी origin नसतो — allow करा
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-// ✅ Global Error Handler — unhandled errors साठी
+// ✅ Global Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Something went wrong" });

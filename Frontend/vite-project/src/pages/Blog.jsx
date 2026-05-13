@@ -5,8 +5,8 @@ import NewsLetter from '../components/NewsLetter'
 const Blog = () => {
   return (
     <div>
-
-      {/* Page Header */}
+      
+  {/* Page Header */}
       <div className='text-center mt-12 mb-4 mx-8 sm:mx-16 xl:mx-24'>
         <h1 className='text-3xl sm:text-4xl font-semibold text-dark mb-3'>
           All <span className='text-primary'>Blog</span> Posts
